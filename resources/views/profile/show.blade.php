@@ -1,11 +1,13 @@
-<x-app-layout>
-    <x-slot name="header">
+{{-- <x-app-layout> --}}
+    {{-- <x-slot name="header">
         <h2 class="h4 font-weight-bold">
             {{ __('Profile') }}
         </h2>
-    </x-slot>
-
-    <div>
+    </x-slot> --}}
+@extends('layouts.app')
+@section('content')
+<div class="container-fluid px-6 py-4"">
+    <div>   
         @if (Laravel\Fortify\Features::canUpdateProfileInformation())
             @livewire('profile.update-profile-information-form')
 
@@ -32,4 +34,7 @@
             @livewire('profile.delete-user-form')
         @endif
     </div>
-</x-app-layout>
+</div>
+    
+@endsection
+{{-- </x-app-layout> --}}

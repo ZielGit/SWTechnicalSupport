@@ -1,10 +1,9 @@
 <x-guest-layout>
     <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
-
-        <div class="card-body">
+        <div class="card-body p-6"">
+            <div class="mb-4">
+                <a href="#"><img src="{{ asset('dash-ui/images/brand/logo/logo-primary.svg') }}" class="mb-2" alt=""></a>
+            </div>
 
             <div class="mb-3">
                 {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
@@ -26,7 +25,7 @@
                     <x-jet-input type="email" name="email" :value="old('email')" required autofocus />
                 </div>
 
-                <div class="d-flex justify-content-end mt-4">
+                <div class="mb-3 d-grid">
                     <x-jet-button>
                         {{ __('Email Password Reset Link') }}
                     </x-jet-button>

@@ -33,7 +33,11 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{ $this->user->profile_photo_url }}" class="rounded-circle" height="80px" width="80px">
+                    @if ($this->user->profile_photo_path)
+                        <img src="/storage/{{ $this->user->profile_photo_path }}" class="rounded-circle" height="80px" width="80px">
+                    @else
+                        <img src="{{ $this->user->profile_photo_url }}" class="rounded-circle" height="80px" width="80px">
+                    @endif
                 </div>
 
                 <!-- New Profile Photo Preview -->

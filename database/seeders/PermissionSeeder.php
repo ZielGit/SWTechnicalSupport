@@ -17,12 +17,12 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         // Artisan::call('cache:clear');
-        Permission::create(['name' => 'dashboard', 'description' => 'Ver panel'])->syncRoles('Administrador');
+        Permission::create(['name' => 'dashboard', 'description' => 'Ver panel'])->syncRoles('Administrador', 'Técnico');
 
-        Permission::create(['name' => 'users.index', 'description' => 'Ver lista de usuarios'])->syncRoles('Administrador');
+        Permission::create(['name' => 'users.index', 'description' => 'Ver lista de usuarios'])->syncRoles('Administrador', 'Técnico');
         Permission::create(['name' => 'users.create', 'description' => 'Crear usuario'])->syncRoles('Administrador');
         Permission::create(['name' => 'users.edit', 'description' => 'Editar usuario'])->syncRoles('Administrador');
-        Permission::create(['name' => 'users.show', 'description' => 'Ver detalles de usuario'])->syncRoles('Administrador');
+        Permission::create(['name' => 'users.show', 'description' => 'Ver detalles de usuario'])->syncRoles('Administrador', 'Técnico');
         Permission::create(['name' => 'users.destroy', 'description' => 'Eliminar usuario'])->syncRoles('Administrador');
     }
 }

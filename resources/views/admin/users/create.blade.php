@@ -19,15 +19,30 @@
                         @csrf
                         <div class="mb-3">
                             <label for="name">{{ __('Name') }}</label>
-                            <input type="text" id="name" class="form-control">
+                            <input type="text" name="name" id="name" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label for="email">{{ __('Email') }}</label>
-                            <input type="email" id="email" class="form-control">
+                            <input type="email" name="email" id="email" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label for="password">{{ __('Password') }}</label>
-                            <input type="password" id="password" class="form-control">
+                            <input type="password" name="password" id="password" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label>{{ __('Roles') }}</label>
+                            @foreach ($roles as $role)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="roles[]" value="{{ $role->id }}" id="role_{{ $role->id }}">
+                                    <label class="form-check-label" for="role_{{ $role->id }}">
+                                        {{ $role->name }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                            <a href="{{ route('users.index') }}" class="btn btn-light">{{ __('Cancel') }}</a>
                         </div>
                     </form>
                 </div>

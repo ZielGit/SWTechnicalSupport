@@ -21,10 +21,10 @@
                     <div class="d-flex align-items-center">
                         <!-- avatar -->
                         <div class="avatar-xxl me-2 position-relative d-flex justify-content-end align-items-end mt-n10">
-                            @if (Auth::user()->profile_photo_path)
-                                <img src="/storage/{{ Auth::user()->profile_photo_path }}" class="avatar-xxl rounded-circle border border-4 border-white-color-40" alt="{{ Auth::user()->name }}" />
+                            @if ($user->profile_photo_path)
+                                <img src="/storage/{{ $user->profile_photo_path }}" class="avatar-xxl rounded-circle border border-4 border-white-color-40" alt="{{ Auth::user()->name }}" />
                             @else
-                                <img src="{{ Auth::user()->profile_photo_url }}" class="avatar-xxl rounded-circle border border-4 border-white-color-40" alt="{{ Auth::user()->name }}" />
+                                <img src="{{ $user->profile_photo_url }}" class="avatar-xxl rounded-circle border border-4 border-white-color-40" alt="{{ Auth::user()->name }}" />
                             @endif
                         </div>
                         <!-- text -->

@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table text-nowrap mb-0">
+                        <table class="table text-nowrap mb-0" id="user-dataTable">
                             <thead class="table-light">
                                 <tr>
                                     <th>{{ __('ID') }}</th>
@@ -53,4 +53,15 @@
         </div>
     </div>
 </div>
+@endsection
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('dash-ui/plugins/datatables/datatables.min.css') }}">
+@endsection
+@section('scripts')
+    <script src="{{ asset('dash-ui/plugins/datatables/datatables.min.js') }}"></script>
+    <script>
+        let table = new DataTable('#user-dataTable', {
+            // options
+        });
+    </script>
 @endsection

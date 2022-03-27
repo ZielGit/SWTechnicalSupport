@@ -41,7 +41,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = User::create($request->all());
-        $user->update(['password'=> Hash::make($request->password)]);
+        // $user->update(['password'=> Hash::make($request->password)]);
         $user->roles()->sync($request->get('roles'));
         return redirect()->route('users.index');
     }

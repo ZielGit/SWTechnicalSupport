@@ -54,14 +54,17 @@
     </div>
 </div>
 @endsection
-@section('styles')
+
+@push('styles')
     <link rel="stylesheet" href="{{ asset('dash-ui/plugins/datatables/datatables.min.css') }}">
-@endsection
-@section('scripts')
+@endpush
+
+@push('scripts')
     <script src="{{ asset('dash-ui/plugins/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('dash-ui/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script>
         let table = new DataTable('#user-dataTable', {
             // options
         });
     </script>
-@endsection
+@endpush

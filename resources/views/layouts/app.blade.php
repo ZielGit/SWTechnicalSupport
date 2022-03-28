@@ -22,7 +22,7 @@
         {{-- Dash-Ui CSS --}}
         <link rel="stylesheet" href="{{ asset('dash-ui/css/theme.css') }}">
         
-        @yield('styles')
+        @stack('styles')
 
         @livewireStyles
 
@@ -66,12 +66,12 @@
         @stack('modals')
 
         @livewireScripts
-
-        @stack('scripts')
         <!-- Theme JS -->
         <script src="{{ asset('dash-ui/js/main.js') }}"></script>
         <script src="{{ asset('dash-ui/js/feather.js') }}"></script>
         <!-- End custom js for this page-->
-        @yield('scripts')
+        
+        @stack('scripts')
+
     </body>
 </html>

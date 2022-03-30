@@ -35,12 +35,12 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>
-                                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-secondary">{{ __('Show') }}</a>
+                                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-info">{{ __('Show') }}</a>
                                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">{{ __('Edit') }}</a>
                                             <form action="{{ route('users.destroy', $user->id) }}" class="d-inline" method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
+                                                <button type="submit" class="btn btn-danger deleteBtn">{{ __('Delete') }}</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -66,5 +66,58 @@
         let table = new DataTable('#user-dataTable', {
             // options
         });
+    </script>
+    @if (session('success') == 'ok')
+        <script>
+            Swal.fire({
+                icon: "success",
+                title: "El usuario ha sido creado correctamente",
+                showConfirmButton: false,
+                timer: 2000
+            })
+        </script>
+    @endif
+    @if (session('update') == 'ok')
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: "success",
+                title: "El usuario ha sido actualizado correctamente",
+                showConfirmButton: false,
+                timer: 2000
+            })
+        </script>
+    @endif
+    @if (session('delete') == 'ok')
+        <script>
+            Swal.fire(
+                'Eliminado',
+                'El usuario ha sido eliminado',
+                'success'
+            )
+        </script>
+    @endif
+    <script>
+        $(document).ready( function(){
+            $(".table").on("click", ".deleteBtn", function (e){
+                var form = $(this).closest('form');
+                // var dataID = $(this).data('id');
+                e.preventDefault();
+                Swal.fire({
+                    title:'¿Estas Seguro?',
+                    text:'¡No podrás revertir esto!',
+                    icon:'warning',
+                    showCancelButton:true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '¡Si, bórralo!',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) =>{
+                    if (result.value) {
+                        form.submit();
+                    }
+                })
+            })
+        })
     </script>
 @endpush

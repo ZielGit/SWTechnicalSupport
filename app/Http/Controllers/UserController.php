@@ -43,7 +43,7 @@ class UserController extends Controller
         $user = User::create($request->all());
         // $user->update(['password'=> Hash::make($request->password)]);
         $user->roles()->sync($request->get('roles'));
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', 'ok');
     }
 
     /**
@@ -80,7 +80,7 @@ class UserController extends Controller
     {
         $user->update($request->all());
         $user->roles()->sync($request->roles);
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('update', 'ok');
     }
 
     /**
@@ -92,7 +92,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('users.index');
-        // return back();
+        return back()->with('delete', 'ok');
     }
 }

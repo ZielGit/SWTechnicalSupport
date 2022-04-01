@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -38,10 +40,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
         $user = User::create($request->all());
-        // $user->update(['password'=> Hash::make($request->password)]);
+        $user->update(['password'=> Hash::make($request->password)]);
         $user->roles()->sync($request->get('roles'));
         return redirect()->route('users.index')->with('success', 'ok');
     }
@@ -76,7 +78,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,User $user)
+    public function update(UpdateUserRequest $request,User $user)
     {
         $user->update($request->all());
         $user->roles()->sync($request->roles);

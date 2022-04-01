@@ -21,17 +21,16 @@
                         <div class="mb-3">
                             <label for="name">{{ __('Name') }}</label>
                             <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $user->name) }}">
+                            @error('name')
+                                <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
+                            @enderror
                         </div>
-                        @error('name')
-                            <div class="alert alert-danger" role="alert">{{ $message }}</div>
-                        @enderror
                         <div class="mb-3">
                             <label for="email">{{ __('Email') }}</label>
                             <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $user->email) }}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password">{{ __('Password') }}</label>
-                            <input type="password" name="password" id="password" class="form-control">
+                            @error('email')
+                                <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label>{{ __('Roles') }}</label>
@@ -43,6 +42,9 @@
                                     </label>
                                 </div>
                             @endforeach
+                            @error('roles')
+                                <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-primary">{{ __('Edit') }}</button>

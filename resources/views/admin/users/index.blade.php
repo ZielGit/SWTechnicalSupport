@@ -71,7 +71,7 @@
         <script>
             Swal.fire({
                 icon: "success",
-                title: "El usuario ha sido creado correctamente",
+                title: "{{ __('User created successfully') }}",
                 showConfirmButton: false,
                 timer: 2000
             })
@@ -82,7 +82,7 @@
             Swal.fire({
                 position: 'top-end',
                 icon: "success",
-                title: "El usuario ha sido actualizado correctamente",
+                title: "{{ __('User updated successfully') }}",
                 showConfirmButton: false,
                 timer: 2000
             })
@@ -91,8 +91,8 @@
     @if (session('delete') == 'ok')
         <script>
             Swal.fire(
-                'Eliminado',
-                'El usuario ha sido eliminado',
+                "{{ __('Deleted!') }}",
+                "{{ __('Successfully deleted user') }}",
                 'success'
             )
         </script>
@@ -104,14 +104,14 @@
                 // var dataID = $(this).data('id');
                 e.preventDefault();
                 Swal.fire({
-                    title:'¿Estas Seguro?',
-                    text:'¡No podrás revertir esto!',
-                    icon:'warning',
+                    title: "{{ __('Are you sure?') }}",
+                    text: "{{ __('You won\u0027t be able to revert this!') }}",
+                    icon: 'warning',
                     showCancelButton:true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: '¡Si, bórralo!',
-                    cancelButtonText: 'Cancelar'
+                    confirmButtonText: "{{ __('Yes, delete it!') }}",
+                    cancelButtonText: "{{ __('Cancel') }}"
                 }).then((result) =>{
                     if (result.value) {
                         form.submit();

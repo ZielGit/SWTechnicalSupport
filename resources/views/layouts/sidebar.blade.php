@@ -10,8 +10,11 @@
             <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 <i data-feather="home" class="nav-icon icon-xs me-2"></i>  {{ __('Dashboard') }}
             </x-jet-nav-link>
+            <x-jet-nav-link href="{{ route('customers.index') }}" :active="request()->routeIs('customers.*')">
+                <i data-feather="users" class="nav-icon icon-xs me-2"></i>  {{ __('Customers') }}
+            </x-jet-nav-link>
             <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
-                <i data-feather="users" class="nav-icon icon-xs me-2"></i>  {{ __('Users') }}
+                <i data-feather="user" class="nav-icon icon-xs me-2"></i>  {{ __('Users') }}
             </x-jet-nav-link>
             <!-- Nav item -->
             <li class="nav-item">

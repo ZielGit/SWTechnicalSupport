@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('email')->nullable()->unique();
             $table->enum('document_type', ['DNI', 'RUC'])->default('DNI');
-            $table->string('document_number');
-            $table->string('email');
-            $table->string('phone');
+            $table->string('document_number')->unique();
+            $table->string('phone')->nullable()->unique();
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }

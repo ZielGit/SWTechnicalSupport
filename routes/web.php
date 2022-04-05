@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
@@ -20,6 +21,7 @@ Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('users', UserController::class)->names('users');
 Route::resource('customers', CustomerController::class)->names('customers');
+Route::resource('brands', BrandController::class)->names('brands');
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');

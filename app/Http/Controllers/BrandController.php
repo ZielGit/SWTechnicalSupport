@@ -36,7 +36,11 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:brands,name|max:60'
+        ]);
+        Brand::create($request->all());
+        return redirect()->route('brands.index')->with('success', 'ok');
     }
 
     /**
@@ -68,9 +72,13 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Brand $brand)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:brands,name,'.$brand->id.'|max:60'
+        ]);
+        $brand->update($request->all());
+        return redirect()->route('brands.index')->with('update', 'ok');;
     }
 
     /**
@@ -79,8 +87,9 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();
+        return back()->with('delete', 'ok');
     }
 }

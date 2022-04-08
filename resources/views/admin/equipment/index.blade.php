@@ -24,7 +24,7 @@
                                 <tr>
                                     <th>{{ __('ID') }}</th>
                                     <th>{{ __('Name') }}</th>
-                                    <th>{{ __('Brand') }}</th>
+                                    <th>{{ __('Brands') }}</th>
                                     <th>{{ __('Actions') }}</th>
                                 </tr>
                             </thead>
@@ -33,7 +33,11 @@
                                     <tr>
                                         <td>{{ $equipment->id }}</td>
                                         <td>{{ $equipment->name }}</td>
-                                        <td>{{ $equipment->brand->name }}</td>
+                                        <td>
+                                            @foreach ($equipment->brands as $brand)
+                                                {{ $brand->name }}
+                                            @endforeach
+                                        </td>
                                         <td>
                                             <a href="{{ route('equipments.show', $equipment->id) }}" class="btn btn-info">{{ __('Show') }}</a>
                                             <a href="{{ route('equipments.edit', $equipment->id) }}" class="btn btn-warning">{{ __('Edit') }}</a>

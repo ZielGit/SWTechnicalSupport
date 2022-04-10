@@ -41,8 +41,20 @@ class EquipmentController extends Controller
         $request->validate([
             'name' => 'required|max:80'
             // validación de llave foranea, cambiar por request.
+            // 'name'          => [
+            //      'string',
+            //      'required',
+            // ],
+            // 'ingredients.*' => [
+            //     'string',
+            // ],
+            // 'ingredients'   => [
+            //     'required',
+            //     'array',
+            // ],
         ]);
-        Equipment::create($request->all());
+        $equipment = Equipment::create($request->all());
+        $equipment->brands()->sync($request->get('brands'));
         return redirect()->route('equipments.index')->with('success', 'ok');
     }
 

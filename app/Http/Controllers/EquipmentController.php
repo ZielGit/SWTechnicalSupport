@@ -94,6 +94,7 @@ class EquipmentController extends Controller
             'name' => 'required|max:80'
         ]);
         $equipment->update($request->all());
+        $equipment->brands()->sync($request->brands);
         return redirect()->route('equipments.index')->with('update', 'ok');;
     }
 

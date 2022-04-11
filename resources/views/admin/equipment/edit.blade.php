@@ -27,13 +27,9 @@
                         </div>
                         <div class="col-lg-6">
                             <label for="brand_id" class="form-label">{{ __('Brand') }}</label>
-                            <select class="form-control" name="brand_id" id="brand_id">
+                            <select class="form-select select2" name="brands[]" id="brand_id" data-placeholder="{{ __('Choose the brands') }}" multiple>
                                 @foreach ($brands as $brand)
-                                    <option value="{{ $brand->id }}" 
-                                        @if ($brand->id == $equipment->brand_id)
-                                            selected
-                                        @endif
-                                    >{{ $brand->name }}</option>
+                                    <option value="{{ $brand->id }}" {{ (in_array($brand->id, old('brands', [])) || $equipment->brands->contains($brand->id)) ? 'selected' : '' }}>{{ $brand->name }}</option>
                                 @endforeach
                             </select>
                             @error('brand_id')
@@ -51,3 +47,21 @@
     </div>
 </div>
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('dash-ui/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dash-ui/plugins/select2-bootstrap-5-theme/select2-bootstrap-5-theme.min.css') }}">
+@endpush
+
+@push('scripts')
+    <script src="{{ asset('dash-ui/plugins/select2/js/select2.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $(".select2").select2({
+                theme: "bootstrap-5",
+                placeholder: $( this ).data( 'placeholder' ),
+                closeOnSelect: false,
+            });
+        });
+    </script>
+@endpush

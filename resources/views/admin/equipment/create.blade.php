@@ -26,7 +26,7 @@
                         </div>
                         <div class="col-lg-6">
                             <label for="brand_id" class="form-label">{{ __('Brand') }}</label>
-                            <select class="form-control select2" name="brands[]" id="brand_id" data-placeholder="{{ __('Choose the brands') }}" multiple>
+                            <select class="form-select select2" name="brands[]" id="brand_id" data-placeholder="{{ __('Choose the brands') }}" multiple>
                                 @foreach ($brands as $brand)
                                     <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                 @endforeach

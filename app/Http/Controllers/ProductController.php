@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
-use App\Models\Equipment;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class EquipmentController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        $equipments = Equipment::get();
-        return view('admin.equipment.index', compact('equipments'));
+        $products = Product::get();
+        return view('admin.product.index', compact('products'));
     }
 
     /**
@@ -27,7 +27,7 @@ class EquipmentController extends Controller
     public function create()
     {
         $brands = Brand::get();
-        return view('admin.equipment.create', compact('brands'));
+        return view('admin.product.create', compact('brands'));
     }
 
     /**
@@ -39,7 +39,9 @@ class EquipmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:80'
+            'name' => 'required|max:80',
+            'brands.*' => 'string',
+            'brands' => 'required','array'
             // validación de llave foranea, cambiar por request.
             // 'name'          => [
             //      'string',
@@ -53,9 +55,9 @@ class EquipmentController extends Controller
             //     'array',
             // ],
         ]);
-        $equipment = Equipment::create($request->all());
-        $equipment->brands()->sync($request->get('brands'));
-        return redirect()->route('equipments.index')->with('success', 'ok');
+        $product = Product::create($request->all());
+        $product->brands()->sync($request->get('brands'));
+        return redirect()->route('products.index')->with('success', 'ok');
     }
 
     /**
@@ -75,10 +77,10 @@ class EquipmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Equipment $equipment)
+    public function edit(Product $product)
     {
         $brands = Brand::get();
-        return view('admin.equipment.edit', compact('equipment', 'brands'));
+        return view('admin.product.edit', compact('product', 'brands'));
     }
 
     /**
@@ -88,14 +90,16 @@ class EquipmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Equipment $equipment)
+    public function update(Request $request, Product $product)
     {
         $request->validate([
-            'name' => 'required|max:80'
+            'name' => 'required|max:80',
+            'brands.*' => 'integer',
+            'brands' => 'required|array'
         ]);
-        $equipment->update($request->all());
-        $equipment->brands()->sync($request->brands);
-        return redirect()->route('equipments.index')->with('update', 'ok');;
+        $product->update($request->all());
+        $product->brands()->sync($request->brands);
+        return redirect()->route('products.index')->with('update', 'ok');;
     }
 
     /**
@@ -104,9 +108,9 @@ class EquipmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Equipment $equipment)
+    public function destroy(Product $product)
     {
-        $equipment->delete();
+        $product->delete();
         return back()->with('delete', 'ok');
     }
 }

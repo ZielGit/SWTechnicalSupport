@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Equipment extends Model
+class Product extends Model
 {
     use HasFactory;
 
@@ -14,6 +14,6 @@ class Equipment extends Model
     ];
 
     public function brands(){
-        return $this->belongsToMany(Brand::class, 'equipment_brands');
+        return $this->belongsToMany(Brand::class, 'product_brands');
     }
 }

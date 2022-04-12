@@ -16,21 +16,14 @@
             <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
                 <i data-feather="user" class="nav-icon icon-xs me-2"></i>  {{ __('Users') }}
             </x-jet-nav-link>
-            <x-jet-nav-link href="{{ route('equipments.index') }}" :active="request()->routeIs('equipments.*')">
-                <i class="nav-icon icon-xs me-2 bi bi-display"></i>  {{ __('Equipments') }}
+            <li class="nav-item">
+                <div class="navbar-heading">{{ __('Support Equipments') }}</div>
+            </li>
+            <x-jet-nav-link href="{{ route('products.index') }}" :active="request()->routeIs('products.*')">
+                <i class="nav-icon icon-xs me-2 bi bi-display"></i>  {{ __('Products') }}
             </x-jet-nav-link>
             <x-jet-nav-link href="{{ route('brands.index') }}" :active="request()->routeIs('brands.*')">
                 <i class="nav-icon icon-xs me-2 bi bi-tags"></i>  {{ __('Brands') }}
-            </x-jet-nav-link>
-            <!-- Nav item -->
-            <li class="nav-item">
-                <div class="navbar-heading">{{ __('Layouts & Pages') }}</div>
-            </li>
-            <x-jet-nav-link href="">
-                <i data-feather="user" class="nav-icon icon-xs me-2"></i>  {{ __('Equipment') }}
-            </x-jet-nav-link>
-            <x-jet-nav-link href="">
-                <i data-feather="user" class="nav-icon icon-xs me-2"></i>  {{ __('Brands') }}
             </x-jet-nav-link>
         </ul>
     </div>

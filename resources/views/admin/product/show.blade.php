@@ -6,7 +6,7 @@
             <!-- Page header -->
             <div class="border-bottom pb-4 mb-4">
                 <div class="mb-2 mb-lg-0">
-                    <h3 class="mb-0 fw-bold">{{ __('Equipment Information') }}</h3>
+                    <h3 class="mb-0 fw-bold">{{ __('Product Information') }}</h3>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                     <div class="d-flex align-items-center">
                         <!-- text -->
                         <div class="lh-1">
-                            <h2 class="mb-0">{{ $equipment->name }}</h2>
+                            <h2 class="mb-0">{{ $product->name }}</h2>
                         </div>
                     </div>
                 </div>
@@ -36,12 +36,12 @@
                 <div class="card">
                     <div class="card-body">
                         <!-- card title -->
-                        <h4 class="card-title mb-4">{{ __('About the Equipment') }}</h4>
+                        <h4 class="card-title mb-4">{{ __('About the Product') }}</h4>
                         <div class="row">
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ route('equipments.index') }}" class="btn btn-primary float-end">{{ __('Go back') }}</a>
+                        <a href="{{ route('products.index') }}" class="btn btn-primary float-end">{{ __('Go back') }}</a>
                     </div>
                 </div>
             </div>

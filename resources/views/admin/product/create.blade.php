@@ -6,7 +6,7 @@
             <!-- Page header -->
             <div class="border-bottom pb-4 mb-4">
                 <div class="mb-2 mb-lg-0">
-                    <h3 class="mb-0 fw-bold">{{ __('Edit Equipment') }}</h3>
+                    <h3 class="mb-0 fw-bold">{{ __('Create Product') }}</h3>
                 </div>
             </div>
         </div>
@@ -15,12 +15,11 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('equipments.update', $equipment) }}" class="row g-3" method="post">
+                    <form action="{{ route('products.store') }}" class="row g-3" method="post">
                         @csrf
-                        @method('put')
                         <div class="col-lg-6">
                             <label for="name" class="form-label">{{ __('Name') }}</label>
-                            <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $equipment->name) }}">
+                            <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}">
                             @error('name')
                                 <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
                             @enderror
@@ -29,7 +28,7 @@
                             <label for="brand_id" class="form-label">{{ __('Brand') }}</label>
                             <select class="form-select select2" name="brands[]" id="brand_id" data-placeholder="{{ __('Choose the brands') }}" multiple>
                                 @foreach ($brands as $brand)
-                                    <option value="{{ $brand->id }}" {{ (in_array($brand->id, old('brands', [])) || $equipment->brands->contains($brand->id)) ? 'selected' : '' }}>{{ $brand->name }}</option>
+                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                 @endforeach
                             </select>
                             @error('brand_id')
@@ -37,8 +36,8 @@
                             @enderror
                         </div>
                         <div class="col-lg-12">
-                            <button type="submit" class="btn btn-primary">{{ __('Edit') }}</button>
-                            <a href="{{ route('equipments.index') }}" class="btn btn-light">{{ __('Cancel') }}</a>
+                            <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                            <a href="{{ route('products.index') }}" class="btn btn-light">{{ __('Cancel') }}</a>
                         </div>
                     </form>
                 </div>

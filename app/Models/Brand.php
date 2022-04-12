@@ -14,6 +14,6 @@ class Brand extends Model
     ];
 
     public function equipments(){
-        return $this->belongsToMany(Equipment::class, 'equipment_brands');
+        return $this->belongsToMany(Equipment::class,  'product_brands');
     }
 }

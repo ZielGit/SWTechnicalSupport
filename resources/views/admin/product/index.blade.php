@@ -6,10 +6,10 @@
             <!-- Page header -->
             <div class="border-bottom pb-4 mb-4 d-flex align-items-center justify-content-between">
                 <div class="mb-2 mb-lg-0">
-                    <h3 class="mb-0 fw-bold">{{ __('Equipments') }}</h3>
+                    <h3 class="mb-0 fw-bold">{{ __('Products') }}</h3>
                 </div>
                 <div>
-                    <a href="{{ route('equipments.create') }}" class="btn btn-primary">{{ __('Create New Equipment') }}</a>
+                    <a href="{{ route('products.create') }}" class="btn btn-primary">{{ __('Create New Product') }}</a>
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table text-nowrap mb-0" id="equipment-dataTable">
+                        <table class="table text-nowrap mb-0" id="product-dataTable">
                             <thead class="table-light">
                                 <tr>
                                     <th>{{ __('ID') }}</th>
@@ -29,19 +29,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($equipments as $equipment)
+                                @foreach ($products as $product)
                                     <tr>
-                                        <td>{{ $equipment->id }}</td>
-                                        <td>{{ $equipment->name }}</td>
+                                        <td>{{ $product->id }}</td>
+                                        <td>{{ $product->name }}</td>
                                         <td>
-                                            @foreach ($equipment->brands as $brand)
+                                            @foreach ($product->brands as $brand)
                                                 {{ $brand->name }}
                                             @endforeach
                                         </td>
                                         <td>
-                                            <a href="{{ route('equipments.show', $equipment->id) }}" class="btn btn-info">{{ __('Show') }}</a>
-                                            <a href="{{ route('equipments.edit', $equipment->id) }}" class="btn btn-warning">{{ __('Edit') }}</a>
-                                            <form action="{{ route('equipments.destroy', $equipment->id) }}" class="d-inline" method="post">
+                                            <a href="{{ route('products.show', $product->id) }}" class="btn btn-info">{{ __('Show') }}</a>
+                                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">{{ __('Edit') }}</a>
+                                            <form action="{{ route('products.destroy', $product->id) }}" class="d-inline" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger deleteBtn">{{ __('Delete') }}</button>
@@ -67,7 +67,7 @@
     <script src="{{ asset('dash-ui/plugins/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('dash-ui/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script>
-        let table = new DataTable('#equipment-dataTable', {
+        let table = new DataTable('#product-dataTable', {
             // options
         });
     </script>
@@ -75,7 +75,7 @@
         <script>
             Swal.fire({
                 icon: "success",
-                title: "{{ __('Equipment created successfully') }}",
+                title: "{{ __('Product created successfully') }}",
                 showConfirmButton: false,
                 timer: 2000
             })
@@ -86,7 +86,7 @@
             Swal.fire({
                 position: 'top-end',
                 icon: "success",
-                title: "{{ __('Equipment updated successfully') }}",
+                title: "{{ __('Product updated successfully') }}",
                 showConfirmButton: false,
                 timer: 2000
             })
@@ -96,7 +96,7 @@
         <script>
             Swal.fire(
                 "{{ __('Deleted!') }}",
-                "{{ __('Successfully deleted Equipment') }}",
+                "{{ __('Successfully deleted Product') }}",
                 'success'
             )
         </script>

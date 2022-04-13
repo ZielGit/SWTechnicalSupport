@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -36,25 +38,8 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        $request->validate([
-            'name' => 'required|max:80',
-            'brands.*' => 'string',
-            'brands' => 'required','array'
-            // validación de llave foranea, cambiar por request.
-            // 'name'          => [
-            //      'string',
-            //      'required',
-            // ],
-            // 'ingredients.*' => [
-            //     'string',
-            // ],
-            // 'ingredients'   => [
-            //     'required',
-            //     'array',
-            // ],
-        ]);
         $product = Product::create($request->all());
         $product->brands()->sync($request->get('brands'));
         return redirect()->route('products.index')->with('success', 'ok');
@@ -90,13 +75,8 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        $request->validate([
-            'name' => 'required|max:80',
-            'brands.*' => 'integer',
-            'brands' => 'required|array'
-        ]);
         $product->update($request->all());
         $product->brands()->sync($request->brands);
         return redirect()->route('products.index')->with('update', 'ok');;

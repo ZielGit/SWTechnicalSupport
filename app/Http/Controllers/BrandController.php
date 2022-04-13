@@ -37,7 +37,7 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:brands,name|max:60'
+            'name' => 'required|string|unique:brands,name|max:60'
         ]);
         Brand::create($request->all());
         return redirect()->route('brands.index')->with('success', 'ok');
@@ -75,7 +75,7 @@ class BrandController extends Controller
     public function update(Request $request, Brand $brand)
     {
         $request->validate([
-            'name' => 'required|unique:brands,name,'.$brand->id.'|max:60'
+            'name' => 'required|string|unique:brands,name,'.$brand->id.'|max:60'
         ]);
         $brand->update($request->all());
         return redirect()->route('brands.index')->with('update', 'ok');;

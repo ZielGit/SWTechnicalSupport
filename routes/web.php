@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ Route::resource('users', UserController::class)->names('users');
 Route::resource('customers', CustomerController::class)->names('customers');
 Route::resource('brands', BrandController::class)->names('brands');
 Route::resource('products', ProductController::class)->names('products');
+Route::resource('services', ServiceController::class)->names('services');
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');

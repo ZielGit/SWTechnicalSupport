@@ -35,6 +35,17 @@
                                 <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="col-lg-6">
+                            <label for="service_id" class="form-label">{{ __('Services') }}</label>
+                            <select class="form-select select2" name="services[]" id="service_id" data-placeholder="{{ __('Choose the services') }}" multiple>
+                                @foreach ($services as $service)
+                                    <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('service_id')
+                                <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="col-lg-12">
                             <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
                             <a href="{{ route('products.index') }}" class="btn btn-light">{{ __('Cancel') }}</a>

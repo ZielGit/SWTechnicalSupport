@@ -25,6 +25,7 @@
                                     <th>{{ __('ID') }}</th>
                                     <th>{{ __('Name') }}</th>
                                     <th>{{ __('Brands') }}</th>
+                                    <th>{{ __('Services') }}</th>
                                     <th>{{ __('Actions') }}</th>
                                 </tr>
                             </thead>
@@ -36,6 +37,11 @@
                                         <td>
                                             @foreach ($product->brands as $brand)
                                                 {{ $brand->name }}
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            @foreach ($product->services as $service)
+                                                {{ $service->name }}
                                             @endforeach
                                         </td>
                                         <td>

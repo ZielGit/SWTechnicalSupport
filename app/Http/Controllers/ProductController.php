@@ -6,6 +6,7 @@ use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Brand;
 use App\Models\Product;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -29,7 +30,8 @@ class ProductController extends Controller
     public function create()
     {
         $brands = Brand::get();
-        return view('admin.product.create', compact('brands'));
+        $services = Service::get();
+        return view('admin.product.create', compact('brands', 'services'));
     }
 
     /**
@@ -42,6 +44,7 @@ class ProductController extends Controller
     {
         $product = Product::create($request->all());
         $product->brands()->sync($request->get('brands'));
+        $product->services()->sync($request->get('services'));
         return redirect()->route('products.index')->with('success', 'ok');
     }
 
@@ -65,7 +68,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $brands = Brand::get();
-        return view('admin.product.edit', compact('product', 'brands'));
+        $services = Service::get();
+        return view('admin.product.edit', compact('product', 'brands', 'services'));
     }
 
     /**
@@ -79,6 +83,7 @@ class ProductController extends Controller
     {
         $product->update($request->all());
         $product->brands()->sync($request->brands);
+        $product->services()->sync($request->services);
         return redirect()->route('products.index')->with('update', 'ok');;
     }
 

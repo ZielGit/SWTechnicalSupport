@@ -25,6 +25,9 @@
             <x-jet-nav-link href="{{ route('brands.index') }}" :active="request()->routeIs('brands.*')">
                 <i class="nav-icon icon-xs me-2 bi bi-tags"></i>  {{ __('Brands') }}
             </x-jet-nav-link>
+            <x-jet-nav-link href="{{ route('services.index') }}" :active="request()->routeIs('services.*')">
+                <i class="nav-icon icon-xs me-2 bi bi-tools"></i>  {{ __('Services') }}
+            </x-jet-nav-link>
         </ul>
     </div>
 </nav>

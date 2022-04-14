@@ -14,7 +14,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services = Service::get();
+        return view('admin.service.index', compact('services'));
     }
 
     /**
@@ -24,7 +25,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.service.create');
     }
 
     /**
@@ -35,7 +36,11 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|unique:services,name|max:60'
+        ]);
+        Service::create($request->all());
+        return redirect()->route('services.index')->with('success', 'ok');
     }
 
     /**
@@ -57,7 +62,7 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        return view('admin.service.edit', compact('service'));
     }
 
     /**
@@ -69,7 +74,11 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|unique:services,name,'.$service->id.'|max:60'
+        ]);
+        $service->update($request->all());
+        return redirect()->route('services.index')->with('update', 'ok');
     }
 
     /**
@@ -80,6 +89,7 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $service->delete();
+        return back()->with('delete', 'ok');
     }
 }

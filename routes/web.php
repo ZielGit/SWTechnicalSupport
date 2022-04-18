@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserController;
@@ -26,6 +27,7 @@ Route::resource('customers', CustomerController::class)->names('customers');
 Route::resource('brands', BrandController::class)->names('brands');
 Route::resource('products', ProductController::class)->names('products');
 Route::resource('services', ServiceController::class)->names('services');
+Route::resource('orders', OrderController::class)->names('orders');
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');

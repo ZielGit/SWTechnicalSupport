@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $customers = Customer::get();
+        return view('admin.order.create', compact('customers'));
     }
 
     /**

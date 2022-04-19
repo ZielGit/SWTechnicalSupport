@@ -11,54 +11,76 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <form action="{{ route('orders.store') }}" method="post">
-            @csrf
-            <div class="col-lg-12 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title mb-4">
-                            {{ __('Customer information') }} <button type="button" class="btn btn-success float-end">{{ __('Create New Customer') }}</button>
-                        </h4>
-                        <div class="row">
-                            <div class="col-lg-6 mb-3">
-                                <label for="customer_id" class="form-label">{{ __('Customer') }}</label>
-                                <select class="form-select select2" name="customer_id" id="customer_id" data-placeholder="{{ __('Choose the customer') }}">
-                                    <option value=""></option>
-                                    @foreach ($customers as $customer)
-                                        <option value="{{ $customer->id }}">{{ $customer->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('customer_id')
-                                    <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
-                                @enderror
+    <form action="{{ route('orders.store') }}" class="row" method="post">
+        @csrf
+        <div class="col-lg-6 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">
+                        {{ __('Customer information') }} <button type="button" class="btn btn-success float-end">{{ __('Create New Customer') }}</button>
+                    </h4>
+                    <div class="row">
+                        <div class="col-lg-6 mb-3">
+                            <label for="customer_id" class="form-label">{{ __('Customer') }}</label>
+                            <select class="form-select select2" name="customer_id" id="customer_id" data-placeholder="{{ __('Choose the customer') }}">
+                                <option value=""></option>
+                                @foreach ($customers as $customer)
+                                    <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('customer_id')
+                                <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <label for="phone" class="form-label">{{ __('Phone') }}</label>
+                            <input type="number" name="phone" id="phone" class="form-control" value="{{ old('phone') }}" disabled>
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <label for="document_type" class="form-label">{{ __('Document Type') }}</label>
+                            <select class="form-control" name="" id="" disabled>
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <label for="document_number" class="form-label">{{ __('Document Number') }}</label>
+                            <input type="number" name="document_number" id="document_number" class="form-control" value="{{ old('document_number') }}" disabled>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Title</h4>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="" class="form-label">{{ __('Order Type') }}</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    {{ __('Workshop service') }}
+                                </label>
                             </div>
-                            <div class="col-lg-6 mb-3">
-                                <label for="phone" class="form-label">{{ __('Phone') }}</label>
-                                <input type="number" name="phone" id="phone" class="form-control" value="{{ old('phone') }}" disabled>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    {{ __('Home Servicio') }}
+                                </label>
                             </div>
-                            <div class="col-lg-6 mb-3">
-                                <label for="document_type" class="form-label">{{ __('Document Type') }}</label>
-                                <select class="form-control" name="" id="" disabled>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                </select>
-                            </div>
-                            <div class="col-lg-6 mb-3">
-                                <label for="document_number" class="form-label">{{ __('Document Number') }}</label>
-                                <input type="number" name="document_number" id="document_number" class="form-control" value="{{ old('document_number') }}" disabled>
-                            </div>  
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12">
-                <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
-                <a href="{{ route('orders.index') }}" class="btn btn-light">{{ __('Cancel') }}</a>
-            </div>
-        </form>
-    </div>
+        </div>
+        <div class="col-lg-12">
+            <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+            <a href="{{ route('orders.index') }}" class="btn btn-light">{{ __('Cancel') }}</a>
+        </div>
+    </form>
 </div>
 @endsection
 

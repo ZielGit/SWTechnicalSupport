@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title mb-4">
-                        {{ __('Customer information') }} <button type="button" class="btn btn-success float-end">{{ __('Create New Customer') }}</button>
+                        {{ __('Customer Information') }} <button type="button" class="btn btn-success float-end">{{ __('Create New Customer') }}</button>
                     </h4>
                     <div class="row">
                         <div class="col-lg-6 mb-3">
@@ -55,24 +55,47 @@
         <div class="col-lg-6 mb-3">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Title</h4>
+                    <h4 class="card-title mb-4">{{ __('Order Information') }}</h4>
                     <div class="row">
                         <div class="col-lg-6">
-                            <label for="" class="form-label">{{ __('Order Type') }}</label>
+                            <div class="mb-3">
+                                <label for="" class="form-label">{{ __('Type of service') }}</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="RadioDefault" id="RadioDefault2" checked>
+                                    <label class="form-check-label" for="RadioDefault2">
+                                        {{ __('Workshop service') }}
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="RadioDefault" id="RadioDefault1">
+                                    <label class="form-check-label" for="RadioDefault1">
+                                        {{ __('Home service') }}
+                                    </label>
+                                </div>
+                            </div>
+                            <label for="" class="form-label">{{ __('Cost of service') }}</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
                                 <label class="form-check-label" for="flexRadioDefault2">
-                                    {{ __('Workshop service') }}
+                                    {{ __('Fixed cost') }}
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                                 <label class="form-check-label" for="flexRadioDefault1">
-                                    {{ __('Home Servicio') }}
+                                    {{ __('Quoting the service') }}
                                 </label>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">{{ __('Equipments') }}</h4>
+                    
                 </div>
             </div>
         </div>

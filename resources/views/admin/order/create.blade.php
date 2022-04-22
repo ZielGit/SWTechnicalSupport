@@ -94,8 +94,24 @@
         <div class="col-lg-12 mb-3">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">{{ __('Equipments') }}</h4>
-                    
+                    <h4 class="card-title mb-4">
+                        {{ __('Equipments') }}
+                        <button type="button" class="btn btn-primary float-end"  data-bs-toggle="modal" data-bs-target="#modelId">{{ __('Add Equipment') }}</button>
+                    </h4>
+                    <table class="table text-nowrap mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>{{ __('ID') }}</th>
+                                <th>{{ __('Actions') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -112,11 +128,74 @@
     <link rel="stylesheet" href="{{ asset('dash-ui/plugins/select2-bootstrap-5-theme/select2-bootstrap-5-theme.min.css') }}">
 @endpush
 
+@push('modals')
+    <!-- Modal -->
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ __('Add Equipment') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="product_id" class="form-label">{{ __('Product') }}</label>
+                            <select class="form-select select2-product" name="product_id" id="product_id" data-placeholder="{{ __('Choose the product') }}">
+                                <option value=""></option>
+                                @foreach ($products as $product)
+                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('product_id')
+                                <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="brand_id" class="form-label">{{ __('Brand') }}</label>
+                            <select class="form-select select2" name="brands[]" id="brand_id" data-placeholder="{{ __('Choose the brand') }}" multiple>
+                                @foreach ($brands as $brand)
+                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('brand_id')
+                                <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="service_id" class="form-label">{{ __('Brand') }}</label>
+                            <select class="form-select select2" name="services[]" id="service_id" data-placeholder="{{ __('Choose the service') }}" multiple>
+                                @foreach ($services as $service_id)
+                                    <option value="{{ $service_id->id }}">{{ $service_id->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('service_id')
+                                <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                        <button type="button" class="btn btn-primary">{{ __('Save') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endpush
+
 @push('scripts')
     <script src="{{ asset('dash-ui/plugins/select2/js/select2.min.js') }}"></script>
     <script>
         $(document).ready(function() {
             $(".select2").select2({
+                theme: "bootstrap-5",
+                width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
+                placeholder: $( this ).data( 'placeholder' ),
+            });
+
+            $(".select2-product").select2({
                 theme: "bootstrap-5",
                 width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
                 placeholder: $( this ).data( 'placeholder' ),

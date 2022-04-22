@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -27,7 +30,10 @@ class OrderController extends Controller
     public function create()
     {
         $customers = Customer::get();
-        return view('admin.order.create', compact('customers'));
+        $products = Product::get();
+        $brands = Brand::get();
+        $services = Service::get();
+        return view('admin.order.create', compact('customers', 'products', 'brands', 'services'));
     }
 
     /**

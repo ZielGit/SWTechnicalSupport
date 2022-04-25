@@ -96,17 +96,23 @@
                 <div class="card-body">
                     <h4 class="card-title mb-4">
                         {{ __('Equipments') }}
-                        <button type="button" class="btn btn-primary float-end"  data-bs-toggle="modal" data-bs-target="#modelId">{{ __('Add Equipment') }}</button>
+                        <button type="button" class="btn btn-primary float-end"  data-bs-toggle="modal" data-bs-target="#equipmentModal">{{ __('Add Equipment') }}</button>
                     </h4>
                     <table class="table text-nowrap mb-0">
                         <thead class="table-light">
                             <tr>
                                 <th>{{ __('ID') }}</th>
-                                <th>{{ __('Actions') }}</th>
+                                <th>{{ __('Product') }}</th>
+                                <th>{{ __('Brand') }}</th>
+                                <th>{{ __('Model') }}</th>
+                                <th>{{ __('Services') }}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -130,7 +136,7 @@
 
 @push('modals')
     <!-- Modal -->
-    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal fade" id="equipmentModal" tabindex="-1" role="dialog" aria-labelledby="equipmentModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -154,7 +160,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="brand_id" class="form-label">{{ __('Brand') }}</label>
-                            <select class="form-select select2" name="brands[]" id="brand_id" data-placeholder="{{ __('Choose the brand') }}" multiple>
+                            <select class="form-select select2-brand" name="brands[]" id="brand_id" data-placeholder="{{ __('Choose the brand') }}">
+                                <option value=""></option>
                                 @foreach ($brands as $brand)
                                     <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                 @endforeach
@@ -164,8 +171,12 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="service_id" class="form-label">{{ __('Brand') }}</label>
-                            <select class="form-select select2" name="services[]" id="service_id" data-placeholder="{{ __('Choose the service') }}" multiple>
+                            <label for="" class="form-label">{{ __('Model') }}</label>
+                            <input class="form-control" type="text" placeholder="{{ __('Enter the device model') }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="service_id" class="form-label">{{ __('Services') }}</label>
+                            <select class="form-select select2-services" name="services[]" id="service_id" data-placeholder="{{ __('Choose the service') }}" multiple>
                                 @foreach ($services as $service_id)
                                     <option value="{{ $service_id->id }}">{{ $service_id->name }}</option>
                                 @endforeach
@@ -191,14 +202,25 @@
         $(document).ready(function() {
             $(".select2").select2({
                 theme: "bootstrap-5",
-                width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
                 placeholder: $( this ).data( 'placeholder' ),
             });
 
             $(".select2-product").select2({
                 theme: "bootstrap-5",
-                width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
                 placeholder: $( this ).data( 'placeholder' ),
+                dropdownParent: $('#equipmentModal')
+            });
+
+            $(".select2-brand").select2({
+                theme: "bootstrap-5",
+                placeholder: $( this ).data( 'placeholder' ),
+                dropdownParent: $('#equipmentModal')
+            });
+
+            $(".select2-services").select2({
+                theme: "bootstrap-5",
+                placeholder: $( this ).data( 'placeholder' ),
+                dropdownParent: $('#equipmentModal')
             });
 
             var customer_id = $('#customer_id');

@@ -121,6 +121,30 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-12 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6 mb-3">
+                            <label for="" class="form-label">{{ __('Faults/Problems') }}</label>
+                            <textarea class="form-control" name="" id="" rows="3"></textarea>
+                        </div>
+                        <div class="col-lg-6  mb-3">
+                            <label for="" class="form-label">{{ __('Solutions') }}</label>
+                            <textarea class="form-control" name="" id="" rows="3"></textarea>
+                        </div>
+                        <div class="col-lg-6  mb-3">
+                            <label for="" class="form-label">{{ __('Observations') }}</label>
+                            <textarea class="form-control" name="" id="" rows="3"></textarea>
+                        </div>
+                        <div class="col-lg-6  mb-3">
+                            <label for="" class="form-label">{{ __('Accessories included') }}</label>
+                            <textarea class="form-control" name="" id="" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-lg-12">
             <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
             <a href="{{ route('orders.index') }}" class="btn btn-light">{{ __('Cancel') }}</a>

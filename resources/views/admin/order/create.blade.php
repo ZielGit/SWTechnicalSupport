@@ -17,7 +17,8 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title mb-4">
-                        {{ __('Customer Information') }} <button type="button" class="btn btn-success float-end">{{ __('Create New Customer') }}</button>
+                        {{ __('Customer Information') }}
+                        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#customerModal">{{ __('Create New Customer') }}</button>
                     </h4>
                     <div class="row">
                         <div class="col-lg-6 mb-3">
@@ -96,7 +97,7 @@
                 <div class="card-body">
                     <h4 class="card-title mb-4">
                         {{ __('Equipments') }}
-                        <button type="button" class="btn btn-primary float-end"  data-bs-toggle="modal" data-bs-target="#equipmentModal">{{ __('Add Equipment') }}</button>
+                        <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#equipmentModal">{{ __('Add Equipment') }}</button>
                     </h4>
                     <table class="table text-nowrap mb-0">
                         <thead class="table-light">
@@ -159,7 +160,59 @@
 @endpush
 
 @push('modals')
-    <!-- Modal -->
+    <!-- Add Modal Customer -->
+    <div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="customerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ __('Quick Customer Registration') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">{{ __('Name') }}</label>
+                            <input type="text" name="name" id="name" class="form-control">
+                            @error('name')
+                                <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="document_type" class="form-label">{{ __('Document Type') }}</label>
+                            <select class="form-control" name="document_type" id="document_type">
+                                <option value="DNI">{{ __('DNI') }}</option>
+                                <option value="RUC">{{ __('RUC') }}</option>
+                            </select>
+                            @error('document_type')
+                                <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="document_number">{{ __('Document Number') }}</label>
+                            <input type="number" name="document_number" id="document_number" class="form-control" value="{{ old('document_number') }}">
+                            @error('document_number')
+                                <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone">{{ __('Phone') }}</label>
+                            <input type="number" name="phone" id="phone" class="form-control" value="{{ old('phone') }}">
+                            @error('phone')
+                                <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                        <button type="button" class="btn btn-primary">{{ __('Save') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Equipment Modal -->
     <div class="modal fade" id="equipmentModal" tabindex="-1" role="dialog" aria-labelledby="equipmentModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">

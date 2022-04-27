@@ -39,10 +39,10 @@
                         </div>
                         <div class="col-lg-6 mb-3">
                             <label for="document_type" class="form-label">{{ __('Document Type') }}</label>
-                            <select class="form-control" name="" id="" disabled>
-                                <option></option>
-                                <option></option>
-                                <option></option>
+                            <select class="form-control" name="document_type" id="document_type" disabled>
+                                <option value=""></option>
+                                <option value="DNI">{{ __('DNI') }}</option>
+                                <option value="RUC">{{ __('RUC') }}</option>
                             </select>
                         </div>
                         <div class="col-lg-6 mb-3">
@@ -220,54 +220,51 @@
                     <h5 class="modal-title">{{ __('Add Equipment') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="" method="post">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="product_id" class="form-label">{{ __('Product') }}</label>
-                            <select class="form-select select2-product" name="product_id" id="product_id" data-placeholder="{{ __('Choose the product') }}">
-                                <option value=""></option>
-                                @foreach ($products as $product)
-                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('product_id')
-                                <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="brand_id" class="form-label">{{ __('Brand') }}</label>
-                            <select class="form-select select2-brand" name="brands[]" id="brand_id" data-placeholder="{{ __('Choose the brand') }}">
-                                <option value=""></option>
-                                @foreach ($brands as $brand)
-                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('brand_id')
-                                <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">{{ __('Model') }}</label>
-                            <input class="form-control" type="text" placeholder="{{ __('Enter the device model') }}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="service_id" class="form-label">{{ __('Services') }}</label>
-                            <select class="form-select select2-services" name="services[]" id="service_id" data-placeholder="{{ __('Choose the service') }}" multiple>
-                                @foreach ($services as $service_id)
-                                    <option value="{{ $service_id->id }}">{{ $service_id->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('service_id')
-                                <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
-                            @enderror
-                        </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="product_id" class="form-label">{{ __('Product') }}</label>
+                        <select class="form-select select2-product" name="product_id" id="product_id" data-placeholder="{{ __('Choose the product') }}">
+                            <option value=""></option>
+                            @foreach ($products as $product)
+                                <option value="{{ $product->id }}">{{ $product->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('product_id')
+                            <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
+                        @enderror
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
-                        <button type="button" class="btn btn-primary">{{ __('Save') }}</button>
+                    <div class="mb-3">
+                        <label for="brand_id" class="form-label">{{ __('Brand') }}</label>
+                        <select class="form-select select2-brand" name="brands[]" id="brand_id" data-placeholder="{{ __('Choose the brand') }}">
+                            <option value=""></option>
+                            @foreach ($brands as $brand)
+                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('brand_id')
+                            <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
+                        @enderror
                     </div>
-                </form>
+                    <div class="mb-3">
+                        <label for="" class="form-label">{{ __('Model') }}</label>
+                        <input class="form-control" type="text" placeholder="{{ __('Enter the device model') }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="service_id" class="form-label">{{ __('Services') }}</label>
+                        <select class="form-select select2-services" name="services[]" id="service_id" data-placeholder="{{ __('Choose the service') }}" multiple>
+                            @foreach ($services as $service_id)
+                                <option value="{{ $service_id->id }}">{{ $service_id->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('service_id')
+                            <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                    <button type="button" class="btn btn-primary">{{ __('Save') }}</button>
+                </div>
             </div>
         </div>
     </div>
@@ -301,6 +298,21 @@
             });
 
             var customer_id = $('#customer_id');
+            customer_id.change(function(){
+                $.ajax({
+                    url: "{{ route('get_customers_by_id') }}",
+                    method: 'GET',
+                    data:{
+                        customer_id: customer_id.val(),
+                    },
+                    success: function(data){
+                        $("#phone").val(data.phone);
+                        $("#document_type option:selected").text(data.document_type);
+                        $("#document_number").val(data.document_number);
+                    }
+                });
+            });
+            
         });
     </script>
 @endpush

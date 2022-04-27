@@ -29,6 +29,8 @@ Route::resource('products', ProductController::class)->names('products');
 Route::resource('services', ServiceController::class)->names('services');
 Route::resource('orders', OrderController::class)->names('orders');
 
+Route::get('get_customers_by_id', [CustomerController::class, 'get_customers_by_id'])->name('get_customers_by_id');
+
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');
 // })->name('dashboard');

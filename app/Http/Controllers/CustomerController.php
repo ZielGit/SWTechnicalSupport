@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Http\Requests\Customer\StoreCustomerRequest;
 use App\Http\Requests\Customer\UpdateCustomerRequest;
+use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
@@ -86,5 +87,12 @@ class CustomerController extends Controller
     {
         $customer->delete();
         return back()->with('delete', 'ok');
+    }
+
+    public function get_customers_by_id(Request $request){
+        if ($request->ajax()) {
+            $customers = Customer::findOrFail($request->customer_id);
+            return response()->json($customers);
+        }
     }
 }

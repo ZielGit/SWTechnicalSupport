@@ -33,7 +33,7 @@ class OrderController extends Controller
         $products = Product::get();
         $brands = Brand::get();
         $services = Service::get();
-        return view('admin.order.create', compact('customers', 'products', 'brands', 'services'));
+        return view('admin.order.create', compact('customers', 'products'));
     }
 
     /**

@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-lg-6 mb-3">
                             <label for="customer_id" class="form-label">{{ __('Customer') }}</label>
-                            <select class="form-select select2" name="customer_id" id="customer_id" data-placeholder="{{ __('Choose the customer') }}">
+                            <select class="form-select select2-customer" name="customer_id" id="customer_id" data-placeholder="{{ __('Choose the customer') }}">
                                 <option value=""></option>
                                 @foreach ($customers as $customer)
                                     <option value="{{ $customer->id }}">{{ $customer->name }}</option>
@@ -226,7 +226,7 @@
                         <select class="form-select select2-product" name="product_id" id="product_id" data-placeholder="{{ __('Choose the product') }}">
                             <option value=""></option>
                             @foreach ($products as $product)
-                                <option value="{{ $product->id }}" data-brands="{{ json_encode($product->brands) }}">{{ $product->name }}</option>
+                                <option value="{{ $product->id }}" data-brands="{{ json_encode($product->brands) }}" data-services="{{ json_encode($product->services) }}">{{ $product->name }}</option>
                             @endforeach
                         </select>
                         @error('product_id')
@@ -236,7 +236,7 @@
                     <div class="mb-3">
                         <label for="brand" class="form-label">{{ __('Brand') }}</label>
                         <select class="form-select select2-brand" name="brand" id="brand"  data-placeholder="{{ __('Choose the brand') }}">
-                            <option value=""></option>
+                            {{-- <option value=""></option> --}}
                         </select>
                         @error('brand_id')
                             <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
@@ -247,9 +247,9 @@
                         <input class="form-control" type="text" placeholder="{{ __('Enter the device model') }}">
                     </div>
                     <div class="mb-3">
-                        <label for="service_id" class="form-label">{{ __('Services') }}</label>
-                        <select class="form-select select2-services" name="services[]" id="service_id" data-placeholder="{{ __('Choose the service') }}">
-                            <option value=""></option>
+                        <label for="service" class="form-label">{{ __('Services') }}</label>
+                        <select class="form-select select2-services" name="service" id="service" data-placeholder="{{ __('Choose the service') }}" multiple>
+                            {{-- <option value=""></option> --}}
                         </select>
                         @error('service_id')
                             <div class="alert alert-danger mt-2 mb-0" role="alert">{{ $message }}</div>
@@ -269,9 +269,7 @@
     <script src="{{ asset('dash-ui/plugins/select2/js/select2.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            "use strict";
-
-            $(".select2").select2({
+            $(".select2-customer").select2({
                 theme: "bootstrap-5",
                 placeholder: $( this ).data( 'placeholder' ),
             });
@@ -288,26 +286,13 @@
                 dropdownParent: $('#equipmentModal')
             });
 
-            // Select dinamico usando select2, ruta, controlador y ajax
             $(".select2-services").select2({
                 theme: "bootstrap-5",
                 placeholder: $( this ).data( 'placeholder' ),
+                closeOnSelect: false,
                 dropdownParent: $('#equipmentModal'),
-                ajax: {
-                    dataType: 'json',
-                    data: function (params) {
-                        return {
-                            q: params.term
-                        };
-                    },
-                    processResults: function (data) {
-                        return {
-                            results: data
-                        };
-                    },
-                }
             });
-
+            
             var customer_id = $('#customer_id');
             customer_id.change(function(){
                 $.ajax({
@@ -326,7 +311,7 @@
 
             // Select dinamico usando javascript jquery y json encode
             $('select[name=product_id]').on('change', function() {
-                $('select[name=brand]').html('<option value="">{{ __('Select One') }}</option>');
+                $('select[name=brand]').html('<option value="">{{ __('Choose the brand') }}</option>');
                 var brand = $('select[name=product_id] :selected').data('brands');
                 var html = '';
                 brand.forEach(function myFunction(item, index) {
@@ -335,6 +320,15 @@
                 $('select[name=brand]').append(html);
             });
             
+            $('select[name=product_id]').on('change', function() {
+                $('select[name=service]').html('<option value="">{{ __('Choose the services') }}</option>');
+                var brand = $('select[name=product_id] :selected').data('services');
+                var html = '';
+                brand.forEach(function myFunction(item, index) {
+                    html += `<option value="${item.id}">${item.name}</option>`
+                });
+                $('select[name=service]').append(html);
+            });
         });
     </script>
 @endpush

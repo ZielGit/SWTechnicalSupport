@@ -58,34 +58,64 @@
                 <div class="card-body">
                     <h4 class="card-title mb-4">{{ __('Order Information') }}</h4>
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label for="" class="form-label">{{ __('Type of service') }}</label>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="RadioDefault" id="RadioDefault2" checked>
-                                    <label class="form-check-label" for="RadioDefault2">
-                                        {{ __('Workshop service') }}
-                                    </label>
+                        <div class="col-lg-4 mb-2">
+                            <label class="form-label">{{ __('Type of service') }}</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type_service" id="Radio2" value="workshop" checked>
+                                <label class="form-check-label" for="Radio2">
+                                    {{ __('Workshop service') }}
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type_service" id="Radio1" value="home">
+                                <label class="form-check-label" for="Radio1">
+                                    {{ __('Home service') }}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 mb-2">
+                            <div class="row" id="data_service">
+                                <div class="col-lg-7">
+                                    <label for="place" class="form-label">{{ __('Place') }}</label>
+                                    <input type="text" name="place" id="place" class="form-control">
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="RadioDefault" id="RadioDefault1">
-                                    <label class="form-check-label" for="RadioDefault1">
-                                        {{ __('Home service') }}
-                                    </label>
+                                <div class="col-lg-5">
+                                    <label for="schedule" class="form-label">{{ __('Schedule') }}</label>
+                                    <input type="date" name="schedule" id="schedule" class="form-control">
                                 </div>
                             </div>
-                            <label for="" class="form-label">{{ __('Cost of service') }}</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 mb-2">
+                            <label class="form-label">{{ __('Cost of service') }}</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                <input class="form-check-input" type="radio" name="cost_service" id="flexRadioDefault2" value="fixed_cost" checked>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     {{ __('Fixed cost') }}
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <input class="form-check-input" type="radio" name="cost_service" id="flexRadioDefault1" value="quoting_service">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     {{ __('Quoting the service') }}
                                 </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 mb-2">
+                            <div class="row" id="cost_data">
+                                <div class="col-lg-4">
+                                    <label for="total" class="form-label">{{ __('Total') }}</label>
+                                    <input type="number" name="total" id="total" class="form-control" min="0">
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="advance" class="form-label">{{ __('Advance') }}</label>
+                                    <input type="number" name="advance" id="advance" class="form-control" min="0">
+                                </div>  
+                                <div class="col-lg-4">
+                                    <label for="subtraction" class="form-label">{{ __('Subtraction') }}</label>
+                                    <input type="number" name="subtraction" id="subtraction" class="form-control" min="0">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -308,6 +338,23 @@
                     }
                 });
             });
+
+            $('#data_service').hide();
+            $('input[name="type_service"]').on('click', function(){
+                if ($(this).val() == 'workshop') {
+                    $('#data_service').hide();
+                } else {
+                    $('#data_service').show();
+                }
+            });
+
+            $('input[name="cost_service"]').on('click', function(){
+                if ($(this).val() == 'fixed_cost') {
+                    $('#cost_data').show();
+                } else {
+                    $('#cost_data').hide();
+                }
+            })
 
             // Select dinamico usando javascript jquery y json encode
             $('select[name=product_id]').on('change', function() {

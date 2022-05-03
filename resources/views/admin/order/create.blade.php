@@ -129,23 +129,20 @@
                         {{ __('Equipments') }}
                         <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#equipmentModal">{{ __('Add Equipment') }}</button>
                     </h4>
-                    <table class="table text-nowrap mb-0">
+                    <table id="detalles" class="table text-nowrap mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>{{ __('ID') }}</th>
+                                {{-- <th>{{ __('ID') }}</th> --}}
                                 <th>{{ __('Product') }}</th>
                                 <th>{{ __('Brand') }}</th>
                                 <th>{{ __('Model') }}</th>
                                 <th>{{ __('Services') }}</th>
+                                <th>{{ __('Delete') }}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                {{-- <td>1</td> --}}
                             </tr>
                         </tbody>
                     </table>
@@ -273,12 +270,13 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="" class="form-label">{{ __('Model') }}</label>
-                        <input class="form-control" type="text" placeholder="{{ __('Enter the device model') }}">
+                        <label for="model" class="form-label">{{ __('Model') }}</label>
+                        <input type="text" class="form-control" name="model" id="model" aria-describedby="helpModel" placeholder="{{ __('Enter the device model') }}">
+                        <small id="helpModel" class="form-text text-muted">{{ __('This is an optional field.') }}</small>
                     </div>
                     <div class="mb-3">
-                        <label for="service" class="form-label">{{ __('Services') }}</label>
-                        <select class="form-select select2-services" name="service" id="service" data-placeholder="{{ __('Choose the service') }}" multiple>
+                        <label for="services" class="form-label">{{ __('Services') }}</label>
+                        <select class="form-select select2-services" name="service" id="services" data-placeholder="{{ __('Choose the service') }}" multiple>
                             {{-- <option value=""></option> --}}
                         </select>
                         @error('service_id')
@@ -288,7 +286,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
-                    <button type="button" class="btn btn-primary">{{ __('Save') }}</button>
+                    <button type="button" id="addEquipment" class="btn btn-primary" data-bs-dismiss="modal">{{ __('Save') }}</button>
                 </div>
             </div>
         </div>
@@ -376,6 +374,29 @@
                 });
                 $('select[name=service]').append(html);
             });
+
+            $('#addEquipment').click(function () {
+                productData = document.getElementById('product_id').value.split('_');;
+                product_id = productData[0];
+                product = $('#product_id option:selected').text();
+                brand = $('#brand option:selected').text();
+                model = $('#model').val();
+                services = $('#services option:selected').text();
+                var fila = '<tr>'+
+                        '<td><input type="hidden" name="product_id" value="'+product_id+'">'+product+'</td>'+
+                        '<td>'+brand+'</td>'+
+                        '<td><input type="hidden" name="model[]" value="'+model+'">'+model+'</td>'+
+                        '<td>'+services+'</td>'+
+                        '<td><button type="button" class="btn btn-danger btn-sm"><i class="bi bi-x-lg"></i></button></td>'+
+                    '</tr>';
+                clean();
+                $('#detalles').append(fila);
+            });
+
+            function clean() {
+                
+                $("#model").val("");
+            }
         });
     </script>
 @endpush

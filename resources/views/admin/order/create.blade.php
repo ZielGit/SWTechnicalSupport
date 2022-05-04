@@ -105,8 +105,8 @@
                         <div class="col-lg-8 mb-2">
                             <div class="row" id="cost_data">
                                 <div class="col-lg-4">
-                                    <label for="total" class="form-label">{{ __('Total') }}</label>
-                                    <input type="number" name="total" id="total" class="form-control" min="0">
+                                    <label for="total_amount" class="form-label">{{ __('Total Amount') }}</label>
+                                    <input type="number" name="total_amount" id="total_amount" class="form-control" min="0">
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="advance" class="form-label">{{ __('Advance') }}</label>

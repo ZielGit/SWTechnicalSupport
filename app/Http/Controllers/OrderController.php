@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -31,8 +32,8 @@ class OrderController extends Controller
     {
         $customers = Customer::get();
         $products = Product::get();
-        $brands = Brand::get();
-        $services = Service::get();
+        // $brands = Brand::get();
+        // $services = Service::get();
         return view('admin.order.create', compact('customers', 'products'));
     }
 
@@ -44,7 +45,19 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $order = Order::create($request->all()+[
+            'user_id'=>Auth::user()->id
+        ]);
+        dd($order);
+        foreach ($request->product_id as $key => $product) {
+            $result[] = array(
+                "product_id"=>$request->product_id[$key],
+                "model"=>$request->model[$key]
+            );
+        }
+
+        $order->orderDetails()->createMany($result);
+        return redirect()->route('orders.index');
     }
 
     /**

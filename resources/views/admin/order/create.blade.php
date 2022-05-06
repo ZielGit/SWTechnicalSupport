@@ -305,13 +305,13 @@
             $(".select2-product").select2({
                 theme: "bootstrap-5",
                 placeholder: $( this ).data( 'placeholder' ),
-                dropdownParent: $('#equipmentModal')
+                dropdownParent: $('#equipmentModal'),
             });
 
             $(".select2-brand").select2({
                 theme: "bootstrap-5",
                 placeholder: $( this ).data( 'placeholder' ),
-                dropdownParent: $('#equipmentModal')
+                dropdownParent: $('#equipmentModal'),
             });
 
             $(".select2-services").select2({
@@ -389,13 +389,17 @@
                         '<td>'+services+'</td>'+
                         '<td><button type="button" class="btn btn-danger btn-sm"><i class="bi bi-x-lg"></i></button></td>'+
                     '</tr>';
-                clean();
                 $('#detalles').append(fila);
+                clean();
             });
 
             function clean() {
-                
+                // los datos de services sigue persistiendo
+                // para resetear model, tengo que vaciar el product ultimo
+                // El orden de services y model no es relevante
+                $("#services").val(null).trigger("change");
                 $("#model").val("");
+                $("#product_id").val(null).trigger("change");
             }
         });
     </script>

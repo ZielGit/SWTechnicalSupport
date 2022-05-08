@@ -394,10 +394,9 @@
             });
 
             function clean() {
-                // los datos de services sigue persistiendo
                 // para resetear model, tengo que vaciar el product ultimo
                 // El orden de services y model no es relevante
-                $("#services").val(null).trigger("change");
+                $("#services").empty();
                 $("#model").val("");
                 $("#product_id").val(null).trigger("change");
             }

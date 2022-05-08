@@ -17,8 +17,18 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('customer_id')->constrained();
-            $table->float('total_amount');
-            $table->enum('status', ['in workshop', 'in warehouse', 'delivered']);
+            $table->enum('type_service', ['workshop', 'home'])->default('workshop');
+            $table->string('place', 80)->nullable();
+            $table->dateTime('schedule')->nullable();
+            $table->enum('cost_service', ['fixed_cost', 'quoting_service'])->default('fixed_cost');
+            $table->float('total_amount')->nullable();
+            $table->float('advance')->nullable();
+            $table->float('subtraction')->nullable();
+            $table->text('problems');
+            $table->text('solutions')->nullable();
+            $table->text('observations')->nullable();
+            $table->text('accessories')->nullable();
+            $table->enum('status', ['workshop', 'warehouse', 'delivered'])->default('workshop');
             $table->timestamps();
         });
     }

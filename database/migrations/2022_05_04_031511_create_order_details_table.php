@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained();
             $table->foreignId('product_id')->constrained();
-            $table->string('model', 30);
+            $table->string('model', 30)->nullable();
             $table->timestamps();
         });
     }

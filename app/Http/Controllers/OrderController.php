@@ -48,14 +48,15 @@ class OrderController extends Controller
         $order = Order::create($request->all()+[
             'user_id'=>Auth::user()->id
         ]);
-        dd($order);
-        foreach ($request->product_id as $key => $product) {
+        
+        // Declarando request->product_id en array
+        foreach ((array) $request->product_id as $key => $product) {
             $result[] = array(
                 "product_id"=>$request->product_id[$key],
                 "model"=>$request->model[$key]
             );
         }
-
+        
         $order->orderDetails()->createMany($result);
         return redirect()->route('orders.index');
     }

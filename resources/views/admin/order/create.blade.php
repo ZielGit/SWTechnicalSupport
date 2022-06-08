@@ -376,17 +376,21 @@
             });
 
             $('#addEquipment').click(function () {
-                productData = document.getElementById('product_id').value.split('_');;
+                productData = document.getElementById('product_id').value.split('_');
                 product_id = productData[0];
                 product = $('#product_id option:selected').text();
+                brandData = document.getElementById('brand').value.split('_');
+
                 brand = $('#brand option:selected').text();
                 model = $('#model').val();
+                serviceData = document.getElementById('services').value.split('_');
+
                 services = $('#services option:selected').text();
                 var fila = '<tr>'+
-                        '<td><input type="hidden" name="product_id" value="'+product_id+'">'+product+'</td>'+
-                        '<td>'+brand+'</td>'+
+                        '<td><input type="hidden" name="product_id[]" value="'+product_id+'">'+product+'</td>'+
+                        '<td><input type="hidden" name="brand[]" value="'+brand+'">'+brand+'</td>'+
                         '<td><input type="hidden" name="model[]" value="'+model+'">'+model+'</td>'+
-                        '<td>'+services+'</td>'+
+                        '<td><input type="hidden" name="services[]" value="'+services+'">'+services+'</td>'+
                         '<td><button type="button" class="btn btn-danger btn-sm"><i class="bi bi-x-lg"></i></button></td>'+
                     '</tr>';
                 $('#detalles').append(fila);

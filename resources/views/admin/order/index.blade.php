@@ -23,6 +23,8 @@
                             <thead class="table-light">
                                 <tr>
                                     <th>{{ __('ID') }}</th>
+                                    <th>{{ __('Customer') }}</th>
+                                    <th>{{ __('Technical') }}</th>
                                     <th>{{ __('Actions') }}</th>
                                 </tr>
                             </thead>
@@ -30,6 +32,8 @@
                                 @foreach ($orders as $order)
                                     <tr>
                                         <td>{{ $order->id }}</td>
+                                        <td>{{ $order->customer->name }}</td>
+                                        <td>{{ $order->user->name }}</td>
                                         <td>
                                             <a href="{{ route('orders.show', $order->id) }}" class="btn btn-info">{{ __('Show') }}</a>
                                             <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-warning">{{ __('Edit') }}</a>

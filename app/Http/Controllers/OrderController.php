@@ -52,8 +52,10 @@ class OrderController extends Controller
         // Declarando request->product_id en array
         foreach ((array) $request->product_id as $key => $product) {
             $result[] = array(
-                "product_id"=>$request->product_id[$key],
-                "model"=>$request->model[$key]
+                "product_id" => $request->product_id[$key],
+                "brand_id" => $request->brand_id[$key],
+                "model" => $request->model[$key],
+                "service_id" => $request->service_id[$key]
             );
         }
         

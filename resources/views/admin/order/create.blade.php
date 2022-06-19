@@ -375,25 +375,28 @@
                 $('select[name=service]').append(html);
             });
 
+            var cont = 1;
+
             $('#addEquipment').click(function () {
                 productData = document.getElementById('product_id').value.split('_');
                 product_id = productData[0];
                 product = $('#product_id option:selected').text();
                 brandData = document.getElementById('brand').value.split('_');
-
+                brand_id = brandData[0];
                 brand = $('#brand option:selected').text();
                 model = $('#model').val();
                 serviceData = document.getElementById('services').value.split('_');
-
+                service_id = serviceData[0];
                 services = $('#services option:selected').text();
-                var fila = '<tr>'+
-                        '<td><input type="hidden" name="product_id[]" value="'+product_id+'">'+product+'</td>'+
-                        '<td><input type="hidden" name="brand[]" value="'+brand+'">'+brand+'</td>'+
-                        '<td><input type="hidden" name="model[]" value="'+model+'">'+model+'</td>'+
-                        '<td><input type="hidden" name="services[]" value="'+services+'">'+services+'</td>'+
-                        '<td><button type="button" class="btn btn-danger btn-sm"><i class="bi bi-x-lg"></i></button></td>'+
-                    '</tr>';
-                $('#detalles').append(fila);
+                var row = '<tr id="row'+cont+'">'+
+                    '<td><input type="hidden" name="product_id[]" value="'+product_id+'">'+product+'</td>'+
+                    '<td><input type="hidden" name="brand_id[]" value="'+brand_id+'">'+brand+'</td>'+
+                    '<td><input type="hidden" name="model[]" value="'+model+'">'+model+'</td>'+
+                    '<td><input type="hidden" name="service_id[]" value="'+service_id+'">'+services+'</td>'+
+                    '<td><button type="button" class="btn btn-danger btn-sm" onclick="delete_row('+cont+');"><i class="bi bi-x-lg"></i></button></td>'+
+                '</tr>';
+                cont++;
+                $('#detalles').append(row);
                 clean();
             });
 
@@ -405,5 +408,10 @@
                 $("#product_id").val(null).trigger("change");
             }
         });
+
+        // manda error de nodefinido dentro de $(document)
+        function delete_row(index) {
+            $("#row"+index).remove();
+        }
     </script>
 @endpush
